@@ -1,0 +1,100 @@
+.main_randWords {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main_randWords .title_desc {
+  width: 700px;
+  text-align: center;
+  margin: 10px 0;
+}
+.main_randWords .btn_get_words {
+  margin-top: 10px;
+  cursor: pointer;
+  font-family: "Montserrat", serif;
+  padding: 10px 15px;
+  background-color: #00ca54;
+  color: white;
+}
+.main_randWords .btn_get_words:focus {
+  border: 2px solid black;
+}
+.main_randWords .btn_get_words:hover {
+  background-color: #00bb4e;
+}
+.main_randWords .notification {
+  margin-top: 10px;
+}
+.main_randWords .words_wrapper {
+  margin-top: 25px;
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.main_randWords .words_wrapper .word {
+  flex: 0 1 15%;
+  margin: 10px 2.5%;
+  padding: 10px 0;
+  border: 5px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main_randWords .words_wrapper .word.right {
+  border-color: #00ca54;
+}
+.main_randWords .words_wrapper .word.wrong {
+  border-color: #d82b00;
+}
+.main_randWords .words_wrapper .word .word_title {
+  font-size: 18px;
+}
+.main_randWords .words_wrapper .word .word_desc.small {
+  text-align: center;
+  font-size: 14px;
+}
+.main_randWords .words_wrapper .word .word_desc.large {
+  text-align: center;
+  font-size: 22px;
+}
+.main_randWords .words_wrapper .word .word_input {
+  align-self: center;
+  max-width: 150px;
+  height: 25px;
+  min-width: 50px;
+}
+.main_randWords .words_wrapper .word .btn_try {
+  margin-top: 5px;
+  width: 50%;
+  cursor: pointer;
+  font-family: "Montserrat", serif;
+  padding: 5px 10px;
+  background-color: #00ca54;
+  color: white;
+  font-size: 12px;
+}
+.main_randWords .words_wrapper .word .btn_try:focus {
+  border: 2px solid black;
+}
+.main_randWords .words_wrapper .word .btn_try:hover {
+  background-color: #00bb4e;
+}
+.main_randWords .btn_enter_all {
+  margin-top: 10px;
+  width: 20%;
+  height: 50px;
+  cursor: pointer;
+  font-family: "Montserrat", serif;
+  padding: 10px 15px;
+  background-color: #00ca54;
+  color: white;
+}
+.main_randWords .btn_enter_all:focus {
+  border: 2px solid black;
+}
+.main_randWords .btn_enter_all:hover {
+  background-color: #00bb4e;
+}

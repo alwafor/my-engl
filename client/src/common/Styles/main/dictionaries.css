@@ -1,0 +1,37 @@
+.dictionaries {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.dictionaries .title_desc {
+  width: 600px;
+  margin: 10px 0;
+  text-align: center;
+}
+.dictionaries .dicts_wrapper {
+  width: 100%;
+  padding: 1%;
+}
+.dictionaries .dicts_wrapper .dict {
+  cursor: pointer;
+  -webkit-user-select: none;
+          user-select: none;
+  width: 100%;
+  background-color: #b6a9a6;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.dictionaries .dicts_wrapper .dict.selected {
+  background-color: #ecb7b7;
+}
+.dictionaries .dicts_wrapper .dict .dict_left .dict_title {
+  font-size: 36px;
+}
+.dictionaries .dicts_wrapper .dict .dict_left .dict_desc {
+  text-indent: 10px;
+}
+.dictionaries .dicts_wrapper .dict:hover {
+  box-shadow: 2px 1px 4px 7px rgba(0, 0, 0, 0.2);
+}

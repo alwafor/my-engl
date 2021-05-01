@@ -1,0 +1,80 @@
+@import "../vars.scss";
+.main_randWords {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   .title_desc {
+      width: 700px;
+      text-align: center;
+      margin: 10px 0;
+   }
+   .btn_get_words {
+      margin-top: 10px;
+      @include button1(10px, 15px, $c_primary);
+   }
+   .notification {
+      margin-top: 10px;
+   }
+   .words_wrapper {
+      margin-top: 25px;
+      width: 100%;
+      min-height: 100px;
+
+      display: flex;
+      flex-wrap: wrap;
+
+      align-items: center;
+
+      .word {
+         flex: 0 1 15%;
+         margin: 10px 2.5%;
+         padding: 10px 0;
+
+         border: 5px solid black;
+         border-radius: 10px;
+
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+
+         &.right {
+            border-color: $c_primary;
+         }
+         &.wrong {
+            border-color: $c_warning;
+         }
+
+         .word_title {
+            font-size: 18px;
+         }
+         .word_desc {
+            &.small {
+               text-align: center;
+               font-size: 14px;
+            }
+            &.large {
+               text-align: center;
+               font-size: 22px;
+            }
+         }
+         .word_input {
+            align-self: center;
+            max-width: 150px;
+            height: 25px;
+            min-width: 50px;
+         }
+         .btn_try {
+            margin-top: 5px;
+            width: 50%;
+            @include button1(5px, 10px);
+            font-size: 12px;
+         }
+      }
+   }
+   .btn_enter_all {
+      margin-top: 10px;
+      width: 20%;
+      height: 50px;
+      @include button1(10px, 15px);
+   }
+}

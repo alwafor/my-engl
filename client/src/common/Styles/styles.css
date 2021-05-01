@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("./main/navbar");
+@import url("./main/rand_words");
+@import url("./main/add_words");
+@import url("./main/dictionaries");
+body {
+  position: relative;
+  font-family: Montserrat, serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+h2 {
+  font-size: 24px;
+}

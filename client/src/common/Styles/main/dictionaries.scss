@@ -1,0 +1,51 @@
+@import "../vars.scss";
+.dictionaries {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   .title_desc {
+      @include title_desc(600px);
+   }
+   .dicts_wrapper {
+      width: 100%;
+      padding: 1%;
+      .dict {
+         cursor: pointer;
+         user-select: none;
+         width: 100%;
+         background-color: $c_gray;
+         display: flex;
+         justify-content: space-between;
+         padding: 10px;
+         
+         &.selected {
+            background-color: rgb(236, 183, 183);
+         }
+
+         .dict_left {
+            .dict_title {
+               font-size: 36px;
+            }
+            .dict_desc {
+               text-indent: 10px;
+            }
+         }
+   
+         .dict_right {
+            .dict_difficulty {
+            }
+            .dict_type {
+            }
+            .dict_words_count {
+
+            }
+         }
+
+         &:hover {
+            box-shadow: 2px 1px 4px 7px rgba(0, 0, 0, 0.2);
+         }
+         margin-bottom: 15px;
+      }
+      
+   }
+}

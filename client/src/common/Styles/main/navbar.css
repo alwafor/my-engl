@@ -1,0 +1,32 @@
+.main_navbar {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.main_navbar .nav {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.main_navbar .nav .nav_head {
+  font-size: 36px;
+}
+.main_navbar .nav .nav_head:hover {
+  cursor: pointer;
+}
+.main_navbar .nav .nav_item {
+  width: 200px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main_navbar .nav .nav_item a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+.main_navbar .nav .nav_item a:hover {
+  color: blue;
+}
