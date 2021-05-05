@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useKey } from "../../common/Utils/customHooks";
 import SingleWord from "./SingleWord";
 
@@ -20,16 +20,15 @@ export default function WordsSelector({
    };
    useKey("Escape", handleEscape);
 
-   const toggleWordId = (id: number) => {
-      // console.log("ID IN A TOGGLE WORD FUNC: ", id);
+   const toggleWordId = useCallback((id: number) => {
       if (!choosedWordsIds.includes(id)) {
          setChoosedWordsIds((prevState: any) => [...prevState, id]);
       } else {
          setChoosedWordsIds(choosedWordsIds.filter((inId) => inId !== id));
       }
-   };
+   }, []);
 
-   // console.log("Choosed words ids: ", choosedWordsIds);
+   console.log("Choosed words ids: ", choosedWordsIds);
    return (
       <div className="words_selector_wrapper">
          <div className="words_selector">

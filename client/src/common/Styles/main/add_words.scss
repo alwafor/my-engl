@@ -165,11 +165,13 @@
          padding: 10px;
          display: flex;
          width: 100%;
-         justify-content: space-between;
+         // justify-content: space-between;
          flex-wrap: wrap;
          .single_word {
             user-select: none;
             @include button_word($c_primary);
+            margin-bottom: 10px;
+            margin-right: 5px;
          }
       }
       .btn_words_selector_confirm {

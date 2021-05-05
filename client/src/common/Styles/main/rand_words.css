@@ -98,3 +98,6 @@
 .main_randWords .btn_enter_all:hover {
   background-color: #00bb4e;
 }
+.main_randWords .hint {
+  margin-top: 7px;
+}

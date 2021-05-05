@@ -4,9 +4,8 @@ import { Dictionary } from "../../entity/Dictionary";
 
 @Resolver()
 export class DictionaryResolver {
-
    @Query(() => [Dictionary])
-   async getAllDictionaries() : Promise<Dictionary[]> {
+   async getAllDictionaries(): Promise<Dictionary[]> {
       return await Dictionary.find({});
    }
 
@@ -23,13 +22,23 @@ export class DictionaryResolver {
          console.log("FOUND WORD NAME: ", foundWord.word);
          foundWords.push(foundWord);
       }
-      await Dictionary.create({name, words: foundWords, difficulty, choosed: false, wordsCount: wordsIds.length}).save();
+      const newDict = await Dictionary.create({
+         name,
+         difficulty,
+         choosed: false,
+         wordsCount: wordsIds.length,
+      });
+      newDict.words = Promise.resolve(foundWords);
+      await newDict.save();
       return true;
    }
 
    @Mutation(() => Boolean)
-   async toggleDictionary(@Arg("id", type => ID) id: number, @Arg("state") state: Boolean): Promise<Boolean> {
-      const foundDict = await Dictionary.findOne({where:{id}});
+   async toggleDictionary(
+      @Arg("id", (type) => ID) id: number,
+      @Arg("state") state: Boolean
+   ): Promise<Boolean> {
+      const foundDict = await Dictionary.findOne({ where: { id } });
       foundDict.choosed = state;
       await Dictionary.save(foundDict);
       return true;

@@ -33,8 +33,8 @@ export class Dictionary extends BaseEntity{
    @Field(type => Int)
    wordsCount: number;
 
-   @ManyToMany(() => Word)
+   @ManyToMany(type => Word, word => word.dictionaries)
    @JoinTable()
    @Field(type => [Word])
-   words: Word[];
+   words: Promise<Word[]>;
 }

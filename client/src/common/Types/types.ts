@@ -6,7 +6,7 @@ export interface Translation {
    word: string
 }
 export interface Words {
-   getRandomWords: Array<Word> | undefined
+   getWords: Array<Word> | undefined
 }
 
 export interface IDictionary {

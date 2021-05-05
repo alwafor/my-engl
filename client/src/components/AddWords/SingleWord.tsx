@@ -6,13 +6,13 @@ interface Props {
    toggleWordId(id: number): void
 }
 
-export default function SingleWord({word,id,toggleWordId}: Props): ReactElement {
+const SingleWord = React.memo(({word,id,toggleWordId}: Props): ReactElement => {
    const [isPressed, setIsPressed] = useState(false);
    const buttonClick = (e: any) => {
       setIsPressed(!isPressed);
       toggleWordId(id);
    }
-   // console.log("ID :",id);
+   console.log("RENDERS!");
    return (
       <div className={"single_word" + (isPressed ? " pressed" : "")}
          onClick={buttonClick}
@@ -20,4 +20,6 @@ export default function SingleWord({word,id,toggleWordId}: Props): ReactElement 
          {word}
       </div>
    )
-}
+});
+
+export default SingleWord;

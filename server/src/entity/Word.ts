@@ -14,11 +14,12 @@ export class Word extends BaseEntity {
    @Field()
    word: string;
 
-   // @Column()
-   // translations: string
-
    @ManyToMany(() => Translation)
    @JoinTable()
    @Field(type => [Translation])
-   translations: Translation[];
+   translations: Promise<Translation[]>;
+
+   @ManyToMany(type => Dictionary, dictionary => dictionary.words)
+   @Field(type => [Word])
+   dictionaries: Promise<Dictionary[]>;
 }

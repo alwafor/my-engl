@@ -77,4 +77,8 @@
       height: 50px;
       @include button1(10px, 15px);
    }
+   .hint {
+      margin-top: 7px;
+     
+   }
 }

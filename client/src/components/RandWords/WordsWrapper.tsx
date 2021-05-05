@@ -4,15 +4,15 @@ import { GET_RANDOM_WORDS } from "../../common/Graphql/query";
 import { Words } from "../../common/Types/types";
 import OneWord from "./OneWord";
 
-export default function WordsWrapper({ getRandomWords }: Words): ReactElement {
+export default function WordsWrapper({ getWords }: Words): ReactElement {
    const [checkAllWords, setCheckAllWords] = useState(false);
-   console.log(getRandomWords);
-   if (getRandomWords && !getRandomWords!.length) return <></>;
+   console.log(getWords);
+   if (getWords && !getWords!.length) return <></>;
 
    return (
       <>
          <div className="words_wrapper">
-            {getRandomWords?.map((item) => {
+            {getWords?.map((item) => {
                return (
                   <OneWord
                      key={item.word}
@@ -22,7 +22,7 @@ export default function WordsWrapper({ getRandomWords }: Words): ReactElement {
                );
             })}
          </div>
-         {getRandomWords ? (
+         {getWords ? (
             <button
                className="btn_enter_all"
                onClick={() => setCheckAllWords(true)}

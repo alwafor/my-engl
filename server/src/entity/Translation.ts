@@ -7,6 +7,7 @@ import {
    JoinTable,
    BaseEntity,
 } from "typeorm";
+import { Word } from "./Word";
 
 @ObjectType()
 @Entity()
@@ -18,4 +19,7 @@ export class Translation extends BaseEntity {
    @Field()
    @Column()
    word: string;
+
+   @ManyToMany(() => Word, word => word.translations)
+   words: Promise<Word[]>;
 }

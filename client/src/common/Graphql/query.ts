@@ -1,23 +1,39 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 export const GET_RANDOM_WORDS = gql`
-   query GetWords($count: Int!){
+   query GetWords($count: Int!) {
       getRandomWords(count: $count) {
-         word,
+         word
          translations {
-           word
+            word
          }
-       }
+      }
    }
 `;
-export const GET_WORDS_COUNT = gql`
+export const GET_WORDS_FROM_SELECTED_DICTS = gql`
+   query GetWords($count: Int!) {
+      getWordsFromSelectedDicts(count: $count) {
+         word
+         translations {
+            word
+         }
+      }
+   }
+`;
+export const GET_ALL_WORDS_COUNT = gql`
    query {
       getWordsCount
    }
 `;
+export const GET_WORDS_COUNT_FROM_SELECTED_DICTS = gql`
+   query {
+      getDictsWordsCount
+   }
+`;
+
 export const GET_ALL_WORDS = gql`
    query {
       getAllWords {
-         word,
+         word
          translations {
             word
          }
@@ -40,13 +56,28 @@ export const GET_ALL_WORDS_ID_NOTRANS = gql`
    }
 `;
 export const GET_ALL_DICTIONARIES = gql`
-   query{
+   query {
       getAllDictionaries {
-         id,
-         name,
-         difficulty,
-         choosed,
+         id
+         name
+         difficulty
+         choosed
          wordsCount
+      }
+   }
+`;
+export const GET_WORDS_COUNT = gql`
+   query {
+      getWordsCount
+   }
+`;
+export const GET_WORDS = gql`
+   query GET($type: String!, $count: Int!){
+      getWords(type: $type, count: $count) {
+         word,
+         translations {
+            word
+         }
       }
    }
 `;
