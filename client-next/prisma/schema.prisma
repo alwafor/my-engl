@@ -10,10 +10,24 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model Contact {
-    id String @id @default(cuid())
-    firstName String
-    lastName String
-    email String
-    avatar String
+model Word {
+  id           Int           @id @default(autoincrement())
+  word         String        @unique
+  translations Translation[]
+  dictionaries Dictionary[]
+}
+
+model Translation {
+  id          Int    @id @default(autoincrement())
+  translation String @unique
+  words       Word[]
+}
+
+model Dictionary {
+  id         Int     @id @default(autoincrement())
+  name       String  @unique
+  difficulty Int
+  choosed    Boolean
+  wordsCount Int
+  words      Word[]
 }
