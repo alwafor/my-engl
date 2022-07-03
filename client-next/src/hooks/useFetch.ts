@@ -23,12 +23,12 @@ interface IUseMutationFetchProps extends IFetchPropsBase {
  * @param runInitial - if set to true, runs fetch once on start
  */
 
-export default function useFetch({
+export default function useFetch<T extends unknown>({
                                    url, method, body, runInitial
                                  }: IUseQueryFetchProps | IUseMutationFetchProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<null | string>(null)
-  const [data, setData] = useState<null | object>(null)
+  const [data, setData] = useState<T | null>(null)
 
   useEffect(() => {
     if (runInitial) {
@@ -51,7 +51,7 @@ export default function useFetch({
 
       const response = await fetch(url, requestInit)
       const responseData = await response.json()
-      setData(responseData)
+      setData(responseData as T)
     } catch (e: any) {
       setError(e.message)
     } finally {
