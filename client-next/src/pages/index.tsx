@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import useFetch from '@/hooks/useFetch'
 import WordsWrapper from '@/components/pages/index/WordsWrapper'
 import {prismaClient} from '../../prisma/prismaInstance'
@@ -25,16 +25,27 @@ export default function Home({wordsCount}: IProps) {
     runInitial: false
   })
 
+  useEffect(() => {
+    if(error) showNotification(`Произошка ошибка! Сообщение ошибки: ${error}`)
+    else if(isLoading) showNotification('Загрузка...')
+    else if(!isLoading) showNotification('')
+  }, [isLoading, error])
+
+  const notificationResetTimer = useRef<NodeJS.Timer | null>(null)
+
   const changeChooseMode = (e: any) => {
     setSelectMode(e.target.value)
     setCounter(1)
   }
 
-  const showNotification = (text: string) => {
+  const showNotification = (text: string, resetDelay = 3000) => {
     if(notification !== text) {
       setNotification(text)
+      if(notificationResetTimer.current !== null) {
+        clearTimeout(notificationResetTimer.current)
+        notificationResetTimer.current = setTimeout(() => setNotification(''), resetDelay)
+      }
     }
-    setTimeout(() => setNotification(''), 3000)
   }
 
   const changeCounter = (e: any) => {
@@ -59,10 +70,6 @@ export default function Home({wordsCount}: IProps) {
       setCounter(inputNumber)
     }
   }
-
-  if(isLoading) showNotification('Загрузка...')
-  if(error) showNotification(`Произошка ошибка! Сообщение ошибки: ${error}`)
-  if(words) showNotification('')
 
   return <div>
     <div className="main_randWords">
