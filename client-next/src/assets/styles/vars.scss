@@ -1,0 +1,43 @@
+$c_primary: rgb(0, 202, 84);
+$c_warning: rgb(216, 43, 0);
+$c_gray: rgb(182, 169, 166);
+$c_blue: rgb(36, 115, 219);
+
+@mixin base_button {
+   cursor: pointer;
+}
+
+@mixin button1($p1: 10px, $p2: 15px, $bgcol: $c_primary, $col: white) {
+   @include base_button();
+
+   font-family: "Montserrat", serif;
+   padding: $p1 $p2;
+   background-color: $bgcol;
+   color: $col;
+   &:focus {
+      border: 2px solid black;
+   }
+   &:hover {
+      background-color: darken($bgcol, 3%);
+   }
+}
+
+@mixin button_word($bgcol) {
+   @include base_button();
+   padding: 10px 15px;
+   background-color: white;
+   color: black;
+   border: 2px solid black;
+   &:hover {
+      background-color: white;
+   }
+   &.pressed {
+      background-color: $c_primary;
+   }  
+}
+
+@mixin title_desc($w) {
+   width: $w;
+   margin: 10px 0;
+   text-align: center;
+}

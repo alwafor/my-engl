@@ -1,0 +1,32 @@
+.main_navbar {
+   margin-top: 10px;
+   .nav {
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .nav_head {
+         font-size: 36px;
+         &:hover {
+            cursor: pointer;
+         }
+      }
+      .nav_item {
+         width: 200px;
+         text-align: center;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         a {
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            &:hover {
+               color: blue;
+            }
+         }
+      }
+   }
+   margin-bottom: 20px;
+}
