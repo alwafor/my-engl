@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import 'vars.scss';
+@import 'zero.css';
 
-@mixin show_button() {
-   
-}
 body {
    position: relative;
    font-family: Montserrat,serif;
@@ -12,8 +10,8 @@ body {
    margin: 0 auto;
    max-width: 1200px;
    padding: 0 20px;
-   // background-color: gray;
 }
+
 h2 {
    font-size: 24px;
 }
