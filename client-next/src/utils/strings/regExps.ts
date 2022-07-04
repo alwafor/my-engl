@@ -1,0 +1,1 @@
+export const regWordSentence = /\s*([^-]{2,})\s+\s*-\s*(([^ ]+\s?)+,*?)/
