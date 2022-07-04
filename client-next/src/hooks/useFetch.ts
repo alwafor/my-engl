@@ -12,7 +12,7 @@ interface IUseQueryFetchProps extends IFetchPropsBase {
 
 interface IUseMutationFetchProps extends IFetchPropsBase {
   method: 'POST' | 'PATCH' | 'PUT' | 'DELETE'
-  body?: BodyInit
+  body?: object
 }
 
 /**
@@ -36,7 +36,7 @@ export default function useFetch<T extends unknown>({
     }
   }, [])
 
-  const runFetch = async (body?: BodyInit) => {
+  const runFetch = async (body?: object) => {
     try {
       setIsLoading(true)
 
@@ -46,7 +46,7 @@ export default function useFetch<T extends unknown>({
       }
 
       if (body) {
-        requestInit.body = body
+        requestInit.body = JSON.stringify(body)
       }
 
       const response = await fetch(url, requestInit)
