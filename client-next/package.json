@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "dependencies": {
     "@prisma/client": "^4.0.0",
@@ -16,9 +17,13 @@
     "zod": "^3.17.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "autoprefixer": "^10.4.7",
+    "jest": "^28.1.2",
+    "jest-environment-jsdom": "^28.1.2",
     "postcss": "^8.4.14",
     "prisma": "^4.0.0",
     "sass": "^1.53.0",
