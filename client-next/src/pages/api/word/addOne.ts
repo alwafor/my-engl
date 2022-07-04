@@ -2,7 +2,7 @@ import {NextApiRequest, NextApiResponse} from 'next'
 import {prismaClient} from '../../../../prisma/prismaInstance'
 import {Prisma} from '@prisma/client'
 
-export default async function createWord(req: NextApiRequest, res: NextApiResponse) {
+export default async function addOneWord(req: NextApiRequest, res: NextApiResponse) {
   let {translationsString, word}: { translationsString?: string, word?: string } = req.body
 
   if (req.method !== 'POST') {
