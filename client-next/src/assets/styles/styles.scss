@@ -16,6 +16,11 @@ h2 {
    font-size: 24px;
 }
 
+input, select {
+   border: 2px solid black;
+   padding: 4px;
+}
+
 @import "./main/navbar.scss";
 @import "./main/rand_words.scss";
 @import "./main/add_words.scss";
