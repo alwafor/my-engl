@@ -4,8 +4,8 @@ import "@/assets/styles/styles.scss"
 import Navbar from '@/components/layout/Navbar'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <>
+  return <div className={'container'}>
     <Navbar/>
     <Component {...pageProps} />
-  </>
+  </div>
 }
