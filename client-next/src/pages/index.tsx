@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react'
 import useFetch from '@/hooks/useFetch'
-import WordsWrapper from '@/components/pages/index/WordsWrapper'
+import WordsWrapper from '@/components/pages/home/words-wrapper'
 import {prismaClient} from '../../prisma/prismaInstance'
 import {IWord} from '../../prisma/prismaTypes'
 

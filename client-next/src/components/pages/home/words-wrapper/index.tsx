@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import OneWord from './OneWord'
-import {IWord} from '../../../../prisma/prismaTypes'
+import OneWord from '../one-word'
+import {IWord} from '../../../../../prisma/prismaTypes'
 
 interface IProps {
   words: IWord[]

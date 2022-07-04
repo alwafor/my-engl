@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {IWord} from '../../../../prisma/prismaTypes'
+import {IWord} from '../../../../../prisma/prismaTypes'
 
 interface Props {
   word: IWord
