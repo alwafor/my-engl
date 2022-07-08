@@ -26,9 +26,9 @@ export default function Home({wordsCount}: IProps) {
   })
 
   useEffect(() => {
-    if(error) showNotification(`Произошка ошибка! Сообщение ошибки: ${error}`)
-    else if(isLoading) showNotification('Загрузка...')
-    else if(!isLoading) showNotification('')
+    if (error) showNotification(`Произошка ошибка! Сообщение ошибки: ${error}`)
+    else if (isLoading) showNotification('Загрузка...')
+    else if (!isLoading) showNotification('')
   }, [isLoading, error])
 
   const notificationResetTimer = useRef<NodeJS.Timer | null>(null)
@@ -39,9 +39,9 @@ export default function Home({wordsCount}: IProps) {
   }
 
   const showNotification = (text: string, resetDelay = 3000) => {
-    if(notification !== text) {
+    if (notification !== text) {
       setNotification(text)
-      if(notificationResetTimer.current !== null) {
+      if (notificationResetTimer.current !== null) {
         clearTimeout(notificationResetTimer.current)
         notificationResetTimer.current = setTimeout(() => setNotification(''), resetDelay)
       }
