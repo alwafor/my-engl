@@ -92,7 +92,7 @@ export default function Home({wordsCount}: IProps) {
       ) : (
         ''
       )}
-      <button className="btn_get_words" onClick={() => runGetWordsFetch()}>
+      <button className="btn_get_words" onClick={() => runGetWordsFetch({query: {take: counter}})}>
         Получить слова
       </button>
       <WordsWrapper words={words || []}/>
