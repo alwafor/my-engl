@@ -15,6 +15,10 @@ interface IUseMutationFetchProps extends IFetchPropsBase {
   body?: object
 }
 
+type TRunFetch = {
+  body?: object, query?: object
+} | undefined
+
 /**
  * useFetch function is used to get data from server
  * @param url - url from where we are fetching
@@ -24,8 +28,8 @@ interface IUseMutationFetchProps extends IFetchPropsBase {
  */
 
 export default function useFetch<T extends unknown>({
-                                   url, method, body, runInitial
-                                 }: IUseQueryFetchProps | IUseMutationFetchProps) {
+                                                      url, method, body, runInitial
+                                                    }: IUseQueryFetchProps | IUseMutationFetchProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<null | string>(null)
   const [data, setData] = useState<T | null>(null)
@@ -36,7 +40,8 @@ export default function useFetch<T extends unknown>({
     }
   }, [])
 
-  const runFetch = async (body?: object) => {
+  const runFetch = async (params: TRunFetch = {}) => {
+    const {body, query} = params
     try {
       setIsLoading(true)
 
@@ -49,7 +54,9 @@ export default function useFetch<T extends unknown>({
         requestInit.body = JSON.stringify(body)
       }
 
-      const response = await fetch(url, requestInit)
+      const queryParams = query && '?' + Object.entries(query).map(([key, value]) => `${key}=${value}`).join('&')
+
+      const response = await fetch(`${url + (queryParams ? queryParams : '')}`, requestInit)
       const responseData = await response.json()
       setData(responseData as T)
     } catch (e: any) {
