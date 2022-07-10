@@ -14,8 +14,6 @@ export default function OneWord({
   const [translationInput, setTranslationInput] = useState('')
   const [wordState, setWordState] = useState('normal')
 
-  console.log(word, translations)
-
   useEffect(() => {
     if (check) {
       checkTranslation()
