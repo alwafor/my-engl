@@ -1,12 +1,11 @@
 import React, {useRef, useState} from 'react'
-import useFetch from '@/hooks/useFetch'
-import AddDict from '@/components/pages/add-words/add-dict'
+import {useMutation} from 'react-query'
+
 import AddWordsHead from '@/components/pages/add-words/head'
 import AddWordsSection from '@/components/pages/add-words/section'
 import {regWordSentence} from '@/utils/strings/regExps'
 import {MSG} from '@/components/pages/add-words/enumMSG'
-import {useMutation} from 'react-query'
-import {IMutationAddWord} from '@/core/backend/word'
+import {IMutationAddWord, IMutationAddWords} from '@/core/backend/word'
 
 export default function AddWords() {
 
@@ -20,6 +19,12 @@ export default function AddWords() {
     method: 'POST',
     body: JSON.stringify(word),
     headers: {'Content-Type': 'application/json'}
+  }))
+
+  const addWords = useMutation((wordsData: IMutationAddWords) => fetch('/api/word/addMany', {
+    method: 'POST',
+    body: JSON.stringify(wordsData),
+    headers: {'Content-type': 'application/json'}
   }))
 
   const showMessage = (message: MSG, hideDelayMs: number = 5000) => {
@@ -47,8 +52,13 @@ export default function AddWords() {
       showMessage(MSG.INCORRECT_INPUT_WORDS, 5000)
       return
     }
-    // todo implement a few words addition
-    // runAddWords({variables: {words: textareaText}})
+
+    const wordsData: IMutationAddWords = textareaText.trim().split(/\n+\s*/).map(fullWordData => {
+      const [word, translationsString] = fullWordData.split(/-(.*)/s)
+      return {word, translationsString}
+    })
+    addWords.mutate(wordsData)
+
     setTextareaText('')
     showMessage(MSG.SUCCESS_WORDS, 5000)
   }
