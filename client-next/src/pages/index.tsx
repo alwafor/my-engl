@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
-import useFetch from '@/hooks/useFetch'
 import WordsWrapper from '@/components/pages/home/words-wrapper'
 import {prismaClient} from '../../prisma/prismaInstance'
+import {useQuery} from 'react-query'
 import {IWord} from '../../prisma/prismaTypes'
 
 enum ESelectMode {
@@ -13,20 +13,29 @@ interface IProps {
   wordsCount: number
 }
 
+
 export default function Home({wordsCount}: IProps) {
 
-  const [counter, setCounter] = useState(1)
+  const [counter, setCounter] = useState(0)
   const [selectMode, setSelectMode] = useState<ESelectMode>(ESelectMode.ALL_WORDS)
   const [notification, setNotification] = useState<null | string>(null)
+  const [counterForFetch, setCounterForFetch] = useState(0)
+  const [words, setWords] = useState<IWord[] | null>(null)
 
-  const {data: words, isLoading, error, run: runGetWordsFetch} = useFetch<IWord[]>({
-    url: '/api/word/getAll',
-    method: 'GET',
-    runInitial: false
+  const {
+    isLoading,
+    isError,
+    error
+  } = useQuery([`words${counterForFetch}`], () => fetch(`/api/word/getAll?take=${counter}`).then(data => data.json()), {
+    enabled: counterForFetch !== 0,
+    cacheTime: Infinity,
+    onSuccess: (data) => {
+      setWords(data)
+    }
   })
 
   useEffect(() => {
-    if (error) showNotification(`Произошка ошибка! Сообщение ошибки: ${error}`)
+    if (isError) showNotification(`Произошка ошибка! Сообщение ошибки: ${error}`)
     else if (isLoading) showNotification('Загрузка...')
     else if (!isLoading) showNotification('')
   }, [isLoading, error])
@@ -78,24 +87,30 @@ export default function Home({wordsCount}: IProps) {
         Вы можете задать количество слов из вашего словаря, которые будут
         выбраны случайно. Вам необходимо будет перевести каждое слово.
       </div>
-      <div className="hint">Режим подбора слов:</div>
-      <select value={selectMode} onChange={changeChooseMode}>
-        <option value={ESelectMode.ALL_WORDS}>{ESelectMode.ALL_WORDS}</option>
-        <option value={ESelectMode.DICT_WORDS}>{ESelectMode.DICT_WORDS}</option>
-      </select>
-      <div className="hint">Кол-во слов:</div>
-      <div className="count_picker">
-        <input type="number" value={counter} onChange={changeCounter}/>
-      </div>
-      {notification ? (
-        <p className="notification">{notification}</p>
-      ) : (
-        ''
-      )}
-      <button className="btn_get_words" onClick={() => runGetWordsFetch({query: {take: counter}})}>
-        Получить слова
-      </button>
-      <WordsWrapper words={words || []}/>
+
+      {wordsCount > 0
+        ? <>
+          <div className="hint">Режим подбора слов:</div>
+          <select value={selectMode} onChange={changeChooseMode}>
+            <option value={ESelectMode.ALL_WORDS}>{ESelectMode.ALL_WORDS}</option>
+            <option value={ESelectMode.DICT_WORDS}>{ESelectMode.DICT_WORDS}</option>
+          </select>
+          <div className="hint">Кол-во слов:</div>
+          <div className="count_picker">
+            <input type="number" value={counter} onChange={changeCounter}/>
+          </div>
+          {notification ? (
+            <p className="notification">{notification}</p>
+          ) : (
+            ''
+          )}
+          <button className="btn_get_words" onClick={() => setCounterForFetch(counter)}>
+            Получить слова
+          </button>
+          <WordsWrapper words={words || []}/>
+        </>
+        : 'Вы не добавили ни одного слова! Перейдите в раздел "Добавить слова"'}
+
     </div>
   </div>
 }
