@@ -47,7 +47,7 @@ export default function OneWord({
             className="word_input"
             type="text"
             value={translationInput}
-            onChange={(e: any) => setTranslationInput(e.target.value)}
+            onChange={e => setTranslationInput(e.target.value)}
           />
           <button className="btn_try" onClick={checkTranslation}>
             Ввод
