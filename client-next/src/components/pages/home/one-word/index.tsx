@@ -8,37 +8,39 @@ interface Props {
 
 export default function OneWord({
                                   word: {word, translations},
-                                  check,
+                                  check
                                 }: Props) {
 
-  const [translationInput, setTranslationInput] = useState("");
-  const [wordState, setWordState] = useState("normal");
+  const [translationInput, setTranslationInput] = useState('')
+  const [wordState, setWordState] = useState('normal')
+
+  console.log(word, translations)
 
   useEffect(() => {
     if (check) {
-      checkTranslation(translationInput);
+      checkTranslation()
     }
-  }, [check]);
+  }, [check])
 
-  const checkTranslation = (e: any) => {
-    let translation = translationInput.toLowerCase();
+  const checkTranslation = () => {
+    let translation = translationInput.toLowerCase()
     let translationExists = translations.some(
-      (item: any) => item.word === translation
-    );
+      tr => tr.translation === translation
+    )
     if (translationExists) {
-      setWordState("right");
+      setWordState('right')
     } else {
-      setWordState("wrong");
+      setWordState('wrong')
     }
-  };
+  }
 
   const getAllTranslations = () => {
-    return translations.map((item: any) => item.word).join(", ");
-  };
+    return translations.map(tr => tr.translation).join(', ')
+  }
   return (
-    <div className={"word" + ` ${wordState}`}>
+    <div className={'word' + ` ${wordState}`}>
       <div className="word_title">{word}</div>
-      {wordState === "normal" ? (
+      {wordState === 'normal' ? (
         <>
           <p className="word_desc">Введите перевод:</p>
           <input
@@ -51,7 +53,7 @@ export default function OneWord({
             Ввод
           </button>
         </>
-      ) : wordState === "wrong" ? (
+      ) : wordState === 'wrong' ? (
         <p className="word_desc small">
           Правильный перевод: {getAllTranslations()}
         </p>
@@ -59,5 +61,5 @@ export default function OneWord({
         <p className="word_desc large">✓</p>
       )}
     </div>
-  );
+  )
 }
