@@ -1,5 +1,6 @@
 import React, {useRef, useState} from 'react'
 import useFetch from '@/hooks/useFetch'
+import AddDict from '@/components/pages/add-words/add-dict'
 import AddWordsHead from '@/components/pages/add-words/head'
 import AddWordsSection from '@/components/pages/add-words/section'
 import {regWordSentence} from '@/utils/strings/regExps'
@@ -21,18 +22,6 @@ export default function AddWords() {
     headers: {'Content-Type': 'application/json'}
   }))
 
-  // const {data: wordFromServer, error: errorAddWord, isLoading: isLoadingWord, run: runAddWord} = useFetch({
-  //   url: '/api/word/addOne',
-  //   method: 'POST',
-  //   runInitial: false
-  // })
-
-  const {data: wordsFromServer, error: errorAddWords, isLoading: isLoadingWords, run: runAddWords} = useFetch({
-    url: '/api/word/addWords',
-    method: 'POST',
-    runInitial: false
-  })
-
   const showMessage = (message: MSG, hideDelayMs: number = 5000) => {
     setMessage(message)
     if (messageTimeout.current) {
@@ -47,7 +36,7 @@ export default function AddWords() {
       return
     }
     const [word, translationsString] = inputText.split(/-(.*)/s)
-    runAddWord({body: {word, translationsString}}).then(res => console.log(res))
+    addWord.mutate({word, translationsString})
     setInputText('')
     // todo check if server returns an error on word addition
     showMessage(MSG.SUCCESS_WORD, 5000)
