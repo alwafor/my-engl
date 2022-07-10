@@ -1,8 +1,8 @@
 import {NextApiRequest, NextApiResponse} from 'next'
-import {addWord} from '@/core/backend/word'
+import {addWord, IMutationAddWord} from '@/core/backend/word'
 
 export default async function addOneWord(req: NextApiRequest, res: NextApiResponse) {
-  let {translationsString, word}: { translationsString?: string, word?: string } = req.body
+  let {translationsString, word}: Partial<IMutationAddWord> = req.body
 
   if (req.method !== 'POST') {
     return res.json('Error! POST method expected!')

@@ -1,6 +1,11 @@
 import {prismaClient} from '../../../prisma/prismaInstance'
 import {Prisma} from '@prisma/client'
 
+export interface IMutationAddWord {
+  translationsString: string,
+  word: string
+}
+
 export const addWord = async (word: string, translationsString: string) => {
 
   word = word.toLowerCase()
