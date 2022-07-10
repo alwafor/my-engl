@@ -1,10 +1,11 @@
 import React, {useRef, useState} from 'react'
 import useFetch from '@/hooks/useFetch'
-import AddDict from '@/components/pages/add-words/add-dict'
 import AddWordsHead from '@/components/pages/add-words/head'
 import AddWordsSection from '@/components/pages/add-words/section'
 import {regWordSentence} from '@/utils/strings/regExps'
 import {MSG} from '@/components/pages/add-words/enumMSG'
+import {useMutation} from 'react-query'
+import {IMutationAddWord} from '@/core/backend/word'
 
 export default function AddWords() {
 
@@ -14,11 +15,17 @@ export default function AddWords() {
 
   const messageTimeout = useRef<NodeJS.Timeout | null>(null)
 
-  const {data: wordFromServer, error: errorAddWord, isLoading: isLoadingWord, run: runAddWord} = useFetch({
-    url: '/api/word/addOne',
+  const addWord = useMutation((word: IMutationAddWord) => fetch('/api/word/addOne', {
     method: 'POST',
-    runInitial: false
-  })
+    body: JSON.stringify(word),
+    headers: {'Content-Type': 'application/json'}
+  }))
+
+  // const {data: wordFromServer, error: errorAddWord, isLoading: isLoadingWord, run: runAddWord} = useFetch({
+  //   url: '/api/word/addOne',
+  //   method: 'POST',
+  //   runInitial: false
+  // })
 
   const {data: wordsFromServer, error: errorAddWords, isLoading: isLoadingWords, run: runAddWords} = useFetch({
     url: '/api/word/addWords',
@@ -39,7 +46,7 @@ export default function AddWords() {
       showMessage(MSG.INCORRECT_INPUT_WORD, 5000)
       return
     }
-    const [word, translationsString] = inputText.split('-')
+    const [word, translationsString] = inputText.split(/-(.*)/s)
     runAddWord({body: {word, translationsString}}).then(res => console.log(res))
     setInputText('')
     // todo check if server returns an error on word addition
