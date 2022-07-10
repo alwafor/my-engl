@@ -6,6 +6,8 @@ export interface IMutationAddWord {
   word: string
 }
 
+export type IMutationAddWords = IMutationAddWord[]
+
 export const addWord = async (word: string, translationsString: string) => {
 
   word = word.toLowerCase()
