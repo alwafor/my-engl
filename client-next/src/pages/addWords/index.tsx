@@ -40,7 +40,7 @@ export default function AddWords() {
       return
     }
     const [word, translationsString] = inputText.split('-')
-    runAddWord({word, translationsString}).then(res => console.log(res))
+    runAddWord({body: {word, translationsString}}).then(res => console.log(res))
     setInputText('')
     // todo check if server returns an error on word addition
     showMessage(MSG.SUCCESS_WORD, 5000)
