@@ -11,7 +11,10 @@ export interface ITranslation {
 
 export interface IDictionary {
   id: number
+  name: string
+
   words: IWord[]
+
   difficulty: number
   choosed: boolean
   wordsCount: number
